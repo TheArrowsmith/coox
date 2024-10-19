@@ -1,0 +1,76 @@
+<header class="bg-slate-300 px-4 sm:px-6 lg:px-8">
+  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
+    <div class="flex items-center gap-2">
+      <a href="/">
+        <svg
+          height="20"
+          width="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M20 22C20 22.5523 19.5523 23 19 23H5.00002C4.44774 23 4.00002 22.5523 4.00002 22V12.7428C3.96494 12.7138 3.93023 12.6844 3.89589 12.6546C3.66805 12.4569 3.45578 12.2399 3.2617 12.0052C2.49567 11.0799 2.02599 9.89862 2.00106 8.60822C1.9997 8.5387 1.99965 8.46909 2.00092 8.39941C2.02621 6.98921 2.58225 5.70857 3.47776 4.74878C3.55744 4.66334 3.63998 4.5803 3.72529 4.4998C4.71028 3.57 6.03859 3 7.50002 3C7.58461 3 7.66881 3.00192 7.75257 3.00571C8.76019 1.78236 10.2885 1 12 1C13.7115 1 15.2399 1.78236 16.2475 3.00572C16.3312 3.00192 16.4154 3 16.5 3C19.5376 3 22 5.46243 22 8.5C22 10.2088 21.22 11.7351 20 12.7428V22ZM12 3C10.7684 3 9.68467 3.63534 9.05945 4.60084C8.84405 4.93348 8.45255 5.10753 8.06129 5.04461C7.87914 5.01532 7.69173 5 7.50002 5C6.69855 5 5.96 5.26939 5.36997 5.72257L5.35684 5.73291C5.26591 5.80334 5.1789 5.87789 5.09601 5.95622C5.04252 6.00679 4.99062 6.05903 4.9404 6.11285C4.45612 6.63213 4.13799 7.29019 4.03566 8.0018C4.01473 8.14735 4.00309 8.29329 4.00054 8.43881C4.00019 8.45917 4.00002 8.47956 4.00002 8.5C4.00002 8.5225 4.00023 8.54495 4.00065 8.56735C4.0143 9.27626 4.24323 9.96929 4.66396 10.551C5.19625 11.2871 5.99384 11.7873 6.88818 11.9461C7.78252 12.1049 8.70357 11.9098 9.4567 11.402C9.91462 11.0932 10.5361 11.2141 10.8449 11.6721C11.1536 12.13 11.0327 12.7515 10.5748 13.0602C9.39131 13.8582 7.94395 14.1648 6.53856 13.9153C6.35629 13.883 6.17659 13.8416 6.00002 13.7915V21H18V19H9.00002C8.44774 19 8.00002 18.5523 8.00002 18C8.00002 17.4477 8.44774 17 9.00002 17H18V12.2422C18 11.9085 18.1665 11.5968 18.4438 11.4112C19.3843 10.7817 20 9.71254 20 8.5C20 6.567 18.433 5 16.5 5C16.3083 5 16.1209 5.01532 15.9388 5.04461C15.5475 5.10753 15.156 4.93348 14.9406 4.60084C14.3154 3.63534 13.2316 3 12 3Z"
+            fill="#1f2937"
+          />
+        </svg>
+      </a>
+      <p class="text-gray-800 px-2 font-medium leading-6">
+        Coox
+      </p>
+    </div>
+    <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+      <%= if @current_user do %>
+        <li class="text-[0.8125rem] leading-6 text-zinc-900">
+          <%= @current_user.email %>
+        </li>
+        <li>
+          <.link
+            href={~p"/users/settings"}
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Settings
+          </.link>
+        </li>
+        <li>
+          <.link
+            href={~p"/users/log_out"}
+            method="delete"
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Log out
+          </.link>
+        </li>
+      <% else %>
+        <li>
+          <.link
+            href={~p"/users/register"}
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Register
+          </.link>
+        </li>
+        <li>
+          <.link
+            href={~p"/users/log_in"}
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Log in
+          </.link>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</header>
+<main class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-2xl">
+    <.flash_group flash={@flash} />
+
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden p-6">
+      <%= @inner_content %>
+    </div>
+  </div>
+</main>
