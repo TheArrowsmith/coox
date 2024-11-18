@@ -8,7 +8,7 @@ defmodule CooxWeb.RecipeLive.Form do
     ~H"""
     <.header><%= @page_title %></.header>
 
-    <.simple_form for={@form} id="recipe-form">
+    <.simple_form for={@form} id="recipe-form" phx-change="validate">
       <.input field={@form[:name]} type="text" label="Name" />
       <.input field={@form[:description]} type="textarea" label="Description" />
 
@@ -31,5 +31,10 @@ defmodule CooxWeb.RecipeLive.Form do
      |> assign(:page_title, "New Recipe")
      |> assign(:recipe, recipe)
      |> assign(:form, to_form(Recipes.change_recipe(recipe)))}
+  end
+
+  def handle_event("validate", %{"recipe" => recipe_params}, socket) do
+    changeset = Recipes.change_recipe(socket.assigns.recipe, recipe_params)
+    {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 end
