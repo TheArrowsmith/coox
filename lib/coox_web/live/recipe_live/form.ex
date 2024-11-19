@@ -9,8 +9,8 @@ defmodule CooxWeb.RecipeLive.Form do
     <.header><%= @page_title %></.header>
 
     <.simple_form for={@form} id="recipe-form" phx-change="validate" phx-submit="save">
-      <.input field={@form[:name]} type="text" label="Name" />
-      <.input field={@form[:description]} type="textarea" label="Description" />
+      <.input field={@form[:name]} type="text" label="Name" phx-debounce />
+      <.input field={@form[:description]} type="textarea" label="Description" phx-debounce />
 
       <:actions>
         <div class="flex">
