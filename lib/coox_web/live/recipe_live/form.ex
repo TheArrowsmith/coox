@@ -12,18 +12,50 @@ defmodule CooxWeb.RecipeLive.Form do
       <div>
         <.label>Image</.label>
 
+        <div
+          :if={@recipe.image_path && Enum.empty?(@uploads.image.entries)}
+          class="mb-6 flex justify-center"
+        >
+          <img src={~p"/uploads/#{@recipe.image_path}"} alt="Recipe image" class="w-1/2 h-auto" />
+        </div>
+
         <%= for entry <- @uploads.image.entries do %>
           <figure class="flex justify-around">
-            <div>
+            <div class="relative">
               <.live_img_preview entry={entry} class="rounded max-h-64 shadow" />
               <figcaption class="text-center text-sm text-gray-700 mt-2">
                 <%= entry.client_name %>
               </figcaption>
+              <button
+                aria-label="cancel"
+                class="absolute top-1 right-2"
+                phx-click="cancel-upload"
+                phx-value-ref={entry.ref}
+                type="button"
+              >
+                &times;
+              </button>
             </div>
           </figure>
         <% end %>
 
-        <.live_file_input upload={@uploads.image} class="mt-2" />
+        <.live_file_input upload={@uploads.image} class="hidden" />
+
+        <label
+          class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 mt-2"
+          for={@uploads.image.ref}
+          phx-drop-target={@uploads.image.ref}
+        >
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <.icon name="hero-arrow-up-tray" class="w-8 h-8 mb-4 text-gray-500" />
+            <p class="mb-2 text-sm text-gray-500">
+              <span class="font-semibold">Click to upload</span> or drag and drop
+            </p>
+            <p class="text-xs text-gray-500">
+              PNG or JPG (Max. 2Mb)
+            </p>
+          </div>
+        </label>
       </div>
 
       <.input field={@form[:name]} type="text" label="Name" phx-debounce />
@@ -73,6 +105,10 @@ defmodule CooxWeb.RecipeLive.Form do
     |> assign(:page_title, "New Recipe")
     |> assign(:recipe, recipe)
     |> assign(:form, to_form(Recipes.change_recipe(recipe)))
+  end
+
+  def handle_event("cancel-upload", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :image, ref)}
   end
 
   @uploads_dir Path.join([:code.priv_dir(:coox), "static", "uploads"])
