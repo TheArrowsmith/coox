@@ -59,6 +59,20 @@ defmodule CooxWeb.RecipeLive.Form do
       </div>
 
       <.input field={@form[:name]} type="text" label="Name" phx-debounce />
+
+      <div>
+        <.label>Rating</.label>
+        <div
+          class="mt-2 flex w-full"
+          data-raty
+          data-score-name={@form[:rating].name}
+          data-score={@form[:rating].value}
+          id={@form[:rating].id}
+          phx-update="ignore"
+        >
+        </div>
+      </div>
+
       <.input
         field={@form[:description]}
         type="textarea"
