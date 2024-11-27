@@ -27,5 +27,9 @@ defmodule Coox.Recipes.Recipe do
     |> cast(attrs, [:name, :description, :rating])
     |> validate_required([:name])
     |> validate_length(:name, max: 100)
+    |> validate_number(:rating,
+      greater_than_or_equal_to: 0.0,
+      less_than_or_equal_to: 5.0
+    )
   end
 end
