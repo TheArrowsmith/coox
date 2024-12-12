@@ -88,6 +88,7 @@ defmodule CooxWeb.RecipeLive.Form do
           <.inputs_for :let={instruction_f} field={@form[:instructions]}>
             <div class="flex items-center mt-4 mb-2 space-x-2">
               <div class="grow">
+                <input type="hidden" name="recipe[instructions_sort][]" value={instruction_f.index} />
                 <.input field={instruction_f[:description]} type="text" phx-debounce />
               </div>
             </div>
