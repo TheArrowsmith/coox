@@ -91,6 +91,16 @@ defmodule CooxWeb.RecipeLive.Form do
                 <input type="hidden" name="recipe[instructions_sort][]" value={instruction_f.index} />
                 <.input field={instruction_f[:description]} type="text" phx-debounce />
               </div>
+
+              <button
+                type="button"
+                name="recipe[instructions_drop][]"
+                value={instruction_f.index}
+                phx-click={JS.dispatch("change")}
+                class="relative top-1"
+              >
+                <.icon name="hero-x-mark" class="w-6 h-6" />
+              </button>
             </div>
           </.inputs_for>
         </div>

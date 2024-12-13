@@ -34,6 +34,7 @@ defmodule Coox.Recipes.Recipe do
     |> cast_embed(
       :instructions,
       with: &Instruction.changeset/2,
+      drop_param: :instructions_drop,
       sort_param: :instructions_sort
     )
   end
