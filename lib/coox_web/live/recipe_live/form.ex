@@ -84,9 +84,10 @@ defmodule CooxWeb.RecipeLive.Form do
       <div class="mb-6">
         <h2 class="text-lg font-semibold text-zinc-700">Instructions</h2>
 
-        <div id="instruction-inputs">
+        <div id="instruction-inputs" phx-hook="SortableInputsFor">
           <.inputs_for :let={instruction_f} field={@form[:instructions]}>
             <div class="flex items-center mt-4 mb-2 space-x-2">
+              <.icon name="hero-bars-3" class="cursor-pointer relative" />
               <div class="grow">
                 <input type="hidden" name="recipe[instructions_sort][]" value={instruction_f.index} />
                 <.input field={instruction_f[:description]} type="text" phx-debounce />
