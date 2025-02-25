@@ -10,7 +10,7 @@ defmodule CooxWeb.RecipeLive.Form do
 
     <.simple_form for={@form} id="recipe-form" phx-change="validate" phx-submit="save">
       <div>
-        <.label>Image</.label>
+        <.label>{gettext("Image")}</.label>
 
         <div
           :if={@recipe.image_path && Enum.empty?(@uploads.image.entries)}
@@ -58,10 +58,10 @@ defmodule CooxWeb.RecipeLive.Form do
         </label>
       </div>
 
-      <.input field={@form[:name]} type="text" label="Name" phx-debounce />
+      <.input field={@form[:name]} type="text" label={gettext("Name")} phx-debounce />
 
       <div>
-        <.label>Rating</.label>
+        <.label>{gettext("Rating")}</.label>
         <div
           class="mt-2 flex w-full"
           data-raty
@@ -76,13 +76,13 @@ defmodule CooxWeb.RecipeLive.Form do
       <.input
         field={@form[:description]}
         type="textarea"
-        label="Description"
+        label={gettext("Description")}
         phx-debounce
         phx-hook="MaintainHeight"
       />
 
       <div class="mb-6">
-        <h2 class="text-lg font-semibold text-zinc-700">Ingredients</h2>
+        <h2 class="text-lg font-semibold text-zinc-700">{gettext("Ingredients")}</h2>
 
         <div id="ingredient-inputs" phx-hook="SortableInputsFor">
           <.inputs_for :let={ingredient_f} field={@form[:ingredients]}>
@@ -113,12 +113,12 @@ defmodule CooxWeb.RecipeLive.Form do
           type="button"
           value="new"
         >
-          <.icon name="hero-plus-circle" class="h-5 w-5 relative top-[-1px]" /> add more
+          <.icon name="hero-plus-circle" class="h-5 w-5 relative top-[-1px]" /> {gettext("add more")}
         </button>
       </div>
 
       <div class="mb-6">
-        <h2 class="text-lg font-semibold text-zinc-700">Instructions</h2>
+        <h2 class="text-lg font-semibold text-zinc-700">{gettext("Instructions")}</h2>
 
         <div id="instruction-inputs" phx-hook="SortableInputsFor">
           <.inputs_for :let={instruction_f} field={@form[:instructions]}>
@@ -149,24 +149,24 @@ defmodule CooxWeb.RecipeLive.Form do
           type="button"
           value="new"
         >
-          <.icon name="hero-plus-circle" class="h-5 w-5 relative top-[-1px]" /> add more
+          <.icon name="hero-plus-circle" class="h-5 w-5 relative top-[-1px]" /> {gettext("add more")}
         </button>
       </div>
 
       <:actions>
         <div class="flex">
-          <.button phx-disable-with="Saving...">Save Recipe</.button>
+          <.button phx-disable-with={gettext("Saving...")}>{gettext("Save Recipe")}</.button>
           <.loading_spinner class="hidden phx-submit-loading:inline-block ml-4 mb-5" />
         </div>
       </:actions>
     </.simple_form>
 
-    <.back navigate={~p"/"}>Back</.back>
+    <.back navigate={~p"/"}>{gettext("Back")}</.back>
     """
   end
 
   def mount(params, _session, socket) do
-    Gettext.put_locale(CooxWeb.Gettext, "pt")
+    Gettext.put_locale(params["locale"] || "en")
 
     {:ok,
      socket
@@ -182,7 +182,7 @@ defmodule CooxWeb.RecipeLive.Form do
     recipe = Recipes.get_recipe!(id, socket.assigns.current_user)
 
     socket
-    |> assign(:page_title, "Edit Recipe")
+    |> assign(:page_title, gettext("Edit Recipe"))
     |> assign(:recipe, recipe)
     |> assign(:form, to_form(Recipes.change_recipe(recipe)))
   end
@@ -191,7 +191,7 @@ defmodule CooxWeb.RecipeLive.Form do
     recipe = %Recipe{}
 
     socket
-    |> assign(:page_title, "New Recipe")
+    |> assign(:page_title, gettext("New Recipe"))
     |> assign(:recipe, recipe)
     |> assign(:form, to_form(Recipes.change_recipe(recipe)))
   end
