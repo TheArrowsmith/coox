@@ -1,0 +1,9 @@
+<main class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-2xl">
+    <.flash_group flash={@flash} />
+
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden p-6">
+      {render_slot(@inner_block)}
+    </div>
+  </div>
+</main>
