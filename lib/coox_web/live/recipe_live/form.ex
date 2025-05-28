@@ -15,6 +15,7 @@ defmodule CooxWeb.RecipeLive.Form do
 
         <div class="flex">
           <.button>Save Recipe</.button>
+          <.loading_spinner class="hidden phx-submit-loading:inline-block ml-4 mb-5" />
         </div>
       </.form>
 
