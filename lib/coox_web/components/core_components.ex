@@ -474,4 +474,25 @@ defmodule CooxWeb.CoreComponents do
     </div>
     """
   end
+
+  attr :class, :string, default: nil
+
+  def loading_spinner(assigns) do
+    ~H"""
+    <div class={["lds-spinner", @class]}>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    """
+  end
 end
