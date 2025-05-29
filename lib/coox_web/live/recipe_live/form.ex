@@ -72,7 +72,13 @@ defmodule CooxWeb.RecipeLive.Form do
           </div>
         </fieldset>
 
-        <.input field={@form[:description]} type="textarea" label="Description" phx-debounce phx-hook="MaintainHeight" />
+        <.input
+          field={@form[:description]}
+          type="textarea"
+          label="Description"
+          phx-debounce
+          phx-hook="MaintainHeight"
+        />
 
         <div class="mb-6">
           <h2 class="text-lg font-semibold text-zinc-700">Instructions</h2>
