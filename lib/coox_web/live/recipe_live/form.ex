@@ -74,6 +74,20 @@ defmodule CooxWeb.RecipeLive.Form do
 
         <.input field={@form[:description]} type="textarea" label="Description" phx-debounce phx-hook="MaintainHeight" />
 
+        <div class="mb-6">
+          <h2 class="text-lg font-semibold text-zinc-700">Instructions</h2>
+
+          <div id="instruction-inputs">
+            <.inputs_for :let={instruction_f} field={@form[:instructions]}>
+              <div class="flex items-center mt-4 mb-2 space-x-2">
+                <div class="grow">
+                  <.input field={instruction_f[:description]} type="text" phx-debounce />
+                </div>
+              </div>
+            </.inputs_for>
+          </div>
+        </div>
+
         <div class="flex">
           <.button phx-disable-with="Saving...">Save Recipe</.button>
           <.loading_spinner class="hidden phx-submit-loading:inline-block ml-4 mb-5" />
