@@ -81,6 +81,44 @@ defmodule CooxWeb.RecipeLive.Form do
         />
 
         <div class="mb-6">
+          <h2 class="text-lg font-semibold text-zinc-700">Ingredients</h2>
+
+          <div id="ingredient-inputs" phx-hook="SortableInputsFor">
+            <.inputs_for :let={ingredient_f} field={@form[:ingredients]}>
+              <div class="flex items-center mt-4 mb-2 space-x-2">
+                <.icon name="hero-bars-3" class="cursor-pointer relative w-5 h-5 mr-2 -top-1" />
+                <div class="grow">
+                  <input type="hidden" name="recipe[ingredients_sort][]" value={ingredient_f.index} />
+                  <.input field={ingredient_f[:name]} type="text" phx-debounce />
+                </div>
+
+                <button
+                  type="button"
+                  name="recipe[ingredients_drop][]"
+                  value={ingredient_f.index}
+                  phx-click={JS.dispatch("change")}
+                  class="relative -top-1"
+                >
+                  <.icon name="hero-x-mark" class="w-5 h-5" />
+                </button>
+              </div>
+            </.inputs_for>
+          </div>
+
+          <input type="hidden" name="recipe[ingredients_drop][]" />
+
+          <button
+            class="mt-4 text-zinc-700"
+            name="recipe[ingredients_sort][]"
+            phx-click={JS.dispatch("change")}
+            type="button"
+            value="new"
+          >
+            <.icon name="hero-plus-circle" class="h-5 w-5 relative top-[-1px]" /> add more
+          </button>
+        </div>
+
+        <div class="mb-6">
           <h2 class="text-lg font-semibold text-zinc-700">Instructions</h2>
 
           <div id="instruction-inputs" phx-hook="SortableInputsFor">
