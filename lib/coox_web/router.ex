@@ -52,7 +52,7 @@ defmodule CooxWeb.Router do
       live "/", RecipeLive.Index, :index
       live "/recipes/new", RecipeLive.Form, :new
       live "/recipes/:id", RecipeLive.Show
-      live "/recipes/:id/edit", RecipeLive.Show
+      live "/recipes/:id/edit", RecipeLive.Form, :edit
     end
 
     post "/users/update-password", UserSessionController, :update_password
