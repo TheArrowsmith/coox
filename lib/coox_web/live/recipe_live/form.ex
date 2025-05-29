@@ -24,14 +24,28 @@ defmodule CooxWeb.RecipeLive.Form do
     """
   end
 
-  def mount(_params, _session, socket) do
-    recipe = %Recipe{}
-
+  def mount(params, _session, socket) do
     {:ok,
      socket
-     |> assign(:page_title, "New Recipe")
-     |> assign(:recipe, recipe)
-     |> assign(:form, to_form(Recipes.change_recipe(recipe)))}
+     |> apply_action(socket.assigns.live_action, params)}
+  end
+
+  defp apply_action(socket, :edit, %{"id" => id}) do
+    recipe = Recipes.get_recipe!(socket.assigns.current_scope, id)
+
+    socket
+    |> assign(:page_title, "Edit Recipe")
+    |> assign(:recipe, recipe)
+    |> assign(:form, to_form(Recipes.change_recipe(recipe)))
+  end
+
+  defp apply_action(socket, :new, _params) do
+    recipe = %Recipe{}
+
+    socket
+    |> assign(:page_title, "New Recipe")
+    |> assign(:recipe, recipe)
+    |> assign(:form, to_form(Recipes.change_recipe(recipe)))
   end
 
   def handle_event("validate", %{"recipe" => recipe_params}, socket) do
@@ -40,15 +54,29 @@ defmodule CooxWeb.RecipeLive.Form do
   end
 
   def handle_event("save", %{"recipe" => recipe_params}, socket) do
-    case Recipes.create_recipe(socket.assigns.current_scope, recipe_params) do
+    case save_recipe(socket, socket.assigns.live_action, recipe_params) do
       {:ok, recipe} ->
+        flash_msg =
+          case socket.assigns.live_action do
+            :new -> "Recipe created successfully"
+            :edit -> "Recipe updated successfully"
+          end
+
         {:noreply,
          socket
-         |> put_flash(:info, "Recipe created successfully")
+         |> put_flash(:info, flash_msg)
          |> push_navigate(to: ~p"/recipes/#{recipe}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  defp save_recipe(socket, :edit, recipe_params) do
+    Recipes.update_recipe(socket.assigns.current_scope, socket.assigns.recipe, recipe_params)
+  end
+
+  defp save_recipe(socket, :new, recipe_params) do
+    Recipes.create_recipe(socket.assigns.current_scope, recipe_params)
   end
 end
