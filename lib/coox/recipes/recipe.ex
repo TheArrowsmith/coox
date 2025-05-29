@@ -36,5 +36,10 @@ defmodule Coox.Recipes.Recipe do
       drop_param: :instructions_drop,
       sort_param: :instructions_sort
     )
+    |> cast_assoc(:ingredients,
+      with: &Ingredient.changeset/3,
+      sort_param: :ingredients_sort,
+      drop_param: :ingredients_drop
+    )
   end
 end
