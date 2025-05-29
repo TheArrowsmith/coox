@@ -29,7 +29,11 @@ defmodule Coox.Recipes do
     |> Repo.update()
   end
 
-  def update_recipe_image_path!(%Scope{user: %{id: uid}}, %Recipe{user_id: uid} = recipe, image_path) do
+  def update_recipe_image_path!(
+        %Scope{user: %{id: uid}},
+        %Recipe{user_id: uid} = recipe,
+        image_path
+      ) do
     recipe |> Ecto.Changeset.change(%{image_path: image_path}) |> Repo.update!()
   end
 
