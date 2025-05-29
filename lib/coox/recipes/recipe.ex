@@ -31,5 +31,6 @@ defmodule Coox.Recipes.Recipe do
       greater_than_or_equal_to: 0.0,
       less_than_or_equal_to: 5.0
     )
+    |> cast_embed(:instructions, with: &Instruction.changeset/2)
   end
 end
