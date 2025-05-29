@@ -25,10 +25,11 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 import Raty from "../vendor/raty";
 import MaintainHeight from "./hooks/MaintainHeight"
+import SortableInputsFor from "./hooks/SortableInputsFor"
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
-  hooks: { MaintainHeight },
+  hooks: { MaintainHeight, SortableInputsFor },
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken}
 })
