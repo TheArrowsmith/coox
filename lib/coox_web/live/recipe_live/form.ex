@@ -86,6 +86,14 @@ defmodule CooxWeb.RecipeLive.Form do
           <h2 class="text-lg font-semibold text-zinc-700">
             {gettext("Ingredients")}
             ({@ingredient_count})
+            <button
+              type="button"
+              name="clear_all_ingredients"
+              phx-click={JS.dispatch("change")}
+              class="text-sm hover:underline font-medium text-orange-500"
+            >
+              Clear all
+            </button>
           </h2>
 
           <button
@@ -210,6 +218,17 @@ defmodule CooxWeb.RecipeLive.Form do
     |> assign(:recipe, recipe)
     |> assign(:ingredient_count, 0)
     |> assign(:form, to_form(Recipes.change_recipe(recipe)))
+  end
+
+  def handle_event("validate", %{"_target" => ["clear_all_ingredients"], "recipe" => recipe_params} = params, socket) do
+    drop_param = Map.keys(params["recipe"]["ingredients"] || %{})
+
+    params =
+      params
+      |> put_in(["recipe", "ingredients_drop"], drop_param)
+      |> Map.delete("_target")
+
+    handle_event("validate", params, socket)
   end
 
   def handle_event("validate", %{"recipe" => recipe_params}, socket) do
