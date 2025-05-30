@@ -88,6 +88,14 @@ defmodule CooxWeb.RecipeLive.Form do
             ({@ingredient_count})
           </h2>
 
+          <button
+            class="mt-4 text-zinc-700"
+            phx-click={JS.dispatch("change", to: "#add-more-ingredients")}
+            type="button"
+          >
+            <.icon name="hero-plus-circle" class="h-5 w-5 relative top-[-1px]" /> add more
+          </button>
+
           <div id="ingredient-inputs" phx-hook="SortableInputsFor">
             <.inputs_for :let={ingredient_f} field={@form[:ingredients]}>
               <div class="flex items-center mt-4 mb-2 space-x-2">
@@ -108,19 +116,16 @@ defmodule CooxWeb.RecipeLive.Form do
                 </button>
               </div>
             </.inputs_for>
+
+            <button
+              class="hidden"
+              name="recipe[ingredients_sort][]"
+              id="add-more-ingredients"
+              value="new"
+            />
           </div>
 
           <input type="hidden" name="recipe[ingredients_drop][]" />
-
-          <button
-            class="mt-4 text-zinc-700"
-            name="recipe[ingredients_sort][]"
-            phx-click={JS.dispatch("change")}
-            type="button"
-            value="new"
-          >
-            <.icon name="hero-plus-circle" class="h-5 w-5 relative top-[-1px]" /> {gettext("add more")}
-          </button>
         </div>
 
         <div class="mb-6">
