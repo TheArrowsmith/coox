@@ -83,7 +83,10 @@ defmodule CooxWeb.RecipeLive.Form do
         />
 
         <div class="mb-6">
-          <h2 class="text-lg font-semibold text-zinc-700">{gettext("Ingredients")}</h2>
+          <h2 class="text-lg font-semibold text-zinc-700">
+            {gettext("Ingredients")}
+            ({@ingredient_count})
+          </h2>
 
           <div id="ingredient-inputs" phx-hook="SortableInputsFor">
             <.inputs_for :let={ingredient_f} field={@form[:ingredients]}>
@@ -190,6 +193,7 @@ defmodule CooxWeb.RecipeLive.Form do
     socket
     |> assign(:page_title, gettext("Edit Recipe"))
     |> assign(:recipe, recipe)
+    |> assign(:ingredient_count, length(recipe.ingredients))
     |> assign(:form, to_form(Recipes.change_recipe(recipe)))
   end
 
@@ -199,12 +203,18 @@ defmodule CooxWeb.RecipeLive.Form do
     socket
     |> assign(:page_title, gettext("New Recipe"))
     |> assign(:recipe, recipe)
+    |> assign(:ingredient_count, 0)
     |> assign(:form, to_form(Recipes.change_recipe(recipe)))
   end
 
   def handle_event("validate", %{"recipe" => recipe_params}, socket) do
     changeset = Recipes.change_recipe(socket.assigns.recipe, recipe_params)
-    {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
+    ingredient_count = changeset |> Ecto.Changeset.get_field(:ingredients) |> length
+
+    {:noreply,
+     socket
+     |> assign(form: to_form(changeset, action: :validate))
+     |> assign(ingredient_count: ingredient_count)}
   end
 
   def handle_event("cancel-upload", %{"ref" => ref}, socket) do
@@ -241,7 +251,7 @@ defmodule CooxWeb.RecipeLive.Form do
          |> push_navigate(to: ~p"/recipes/#{recipe}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, form: to_form(changeset))}
+        {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
     end
   end
 
