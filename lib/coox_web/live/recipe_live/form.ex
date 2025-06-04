@@ -168,6 +168,8 @@ defmodule CooxWeb.RecipeLive.Form do
   end
 
   def mount(params, _session, socket) do
+    Gettext.put_locale(CooxWeb.Gettext, "pt")
+
     {:ok,
      socket
      |> allow_upload(:image,
