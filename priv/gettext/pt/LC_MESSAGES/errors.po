@@ -1,4 +1,4 @@
- msgid "can't be blank"
+msgid "can't be blank"
 msgstr "não pode ficar em branco"
 
 msgid "has already been taken"

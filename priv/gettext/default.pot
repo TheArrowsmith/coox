@@ -1,0 +1,124 @@
+## This file is a PO Template file.
+##
+## "msgid"s here are often extracted from source code.
+## Add new messages manually only if they're dynamic
+## messages that can't be statically extracted.
+##
+## Run "mix gettext.extract" to bring this file up to
+## date. Leave "msgstr"s empty as changing them here has no
+## effect: edit them in PO (.po) files instead.
+#
+msgid ""
+msgstr ""
+
+#: lib/coox_web/components/core_components.ex:323
+#, elixir-autogen, elixir-format
+msgid "Actions"
+msgstr ""
+
+#: lib/coox_web/components/layouts.ex:58
+#: lib/coox_web/components/layouts.ex:70
+#, elixir-autogen, elixir-format
+msgid "Attempting to reconnect"
+msgstr ""
+
+#: lib/coox_web/components/layouts.ex:48
+#, elixir-autogen, elixir-format
+msgid "Error!"
+msgstr ""
+
+#: lib/coox_web/components/layouts.ex:65
+#, elixir-autogen, elixir-format
+msgid "Something went wrong!"
+msgstr ""
+
+#: lib/coox_web/components/layouts.ex:47
+#, elixir-autogen, elixir-format
+msgid "Success!"
+msgstr ""
+
+#: lib/coox_web/components/layouts.ex:53
+#, elixir-autogen, elixir-format
+msgid "We can't find the internet"
+msgstr ""
+
+#: lib/coox_web/components/core_components.ex:72
+#, elixir-autogen, elixir-format
+msgid "close"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:14
+#, elixir-autogen, elixir-format
+msgid "Image"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:165
+#, elixir-autogen, elixir-format
+msgid "Back"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:78
+#, elixir-autogen, elixir-format
+msgid "Description"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:187
+#, elixir-autogen, elixir-format
+msgid "Edit Recipe"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:84
+#, elixir-autogen, elixir-format
+msgid "Ingredients"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:122
+#, elixir-autogen, elixir-format
+msgid "Instructions"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:60
+#, elixir-autogen, elixir-format
+msgid "Name"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:196
+#, elixir-autogen, elixir-format
+msgid "New Recipe"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:63
+#, elixir-autogen, elixir-format
+msgid "Rating"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:160
+#, elixir-autogen, elixir-format
+msgid "Save Recipe"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:160
+#, elixir-autogen, elixir-format
+msgid "Saving..."
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:117
+#: lib/coox_web/live/recipe_live/form.ex:154
+#, elixir-autogen, elixir-format
+msgid "add more"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:51
+#, elixir-autogen, elixir-format
+msgid "Click to upload"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:54
+#, elixir-autogen, elixir-format
+msgid "or"
+msgstr ""
+
+#: lib/coox_web/live/recipe_live/form.ex:51
+#, elixir-autogen, elixir-format
+msgid "or drag and drop"
+msgstr ""
